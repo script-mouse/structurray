@@ -1,0 +1,23 @@
+[package]
+name = "structurray"
+version = "0.1.0"
+edition = "2021"
+readme = "README.md"
+authors = ["Benjamin Richcreek <brygidarichcreek@gmail.com>"]
+description = "Easy psuedo-array generation for database optimization"
+license = "Apache-2.0"
+categories = ["data-structures", "development-tools::build-utils"]
+keywords = ["macro","serde","serialization","proc-macro","array"]
+repository = "https://github.com/script-mouse/structurray"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+quote = "1.0"
+syn = {version = "2.0", features = ["full"]}
+proc-macro2 = "1.0"
+ascii_basing = {path = "../ascii_basing", version = "0.1"}
+
+[dev-dependencies]
+serde = {version = "1", features = ["derive"]}
