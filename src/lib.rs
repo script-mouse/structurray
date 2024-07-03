@@ -99,6 +99,7 @@ impl Parse for Arguments {
 ///
 /// [`struct`]: https://doc.rust-lang.org/1.58.1/std/keyword.struct.html
 /// [`Serialize`]: https://docs.rs/serde/latest/serde
+
 pub fn faux_array(args: TokenStream, actual: TokenStream) -> TokenStream {
     let string_holder = args.to_string();
     let mut string_args = string_holder.split(',');
