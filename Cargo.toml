@@ -17,7 +17,7 @@ proc-macro = true
 quote = "1.0"
 syn = {version = "2.0", features = ["full"]}
 proc-macro2 = "1.0"
-ascii_basing = {path = "../ascii_basing", version = "0.1"}
+ascii_basing = "0.1"
 
 [dev-dependencies]
 serde = {version = "1", features = ["derive"]}
