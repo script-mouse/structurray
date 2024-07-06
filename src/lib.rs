@@ -15,8 +15,8 @@ limitations under the License.
 */
 //! # Psuedo-Array Generation
 //! This crate allows for the generation of [`struct`]s with an arbitrary, programmer-provided number (less than [`u32::MAX`]) of identical fields with different names. 
-//! Generally speaking, it is also useful to use [`structinator`](https://crates.io/crates/structinator)
-//! on [`struct`]s of this size to allow them to be automatically constructed from [`Iterator`]s.
+//! Generally speaking, it is also useful to use another crate, [`structinator`](https://crates.io/crates/structinator),
+//! on large [`struct`]s generated with this crate to allow your [`struct`] to be automatically constructed from an [`Iterator`].
 //!
 //! Psuedo-Array [`struct`]s like this are ideal for reducing data spent on identifiers in online databases like [Google Firebase](https://firebase.google.com).
 //!
@@ -50,6 +50,8 @@ impl Parse for Arguments {
 #[proc_macro_attribute]
 /// Converts your [`struct`] to a psuedo-array
 ///
+/// # Arguments
+/// This attribute macro should be invoked with two arguments. The first argument should be a type, such as [`u8`] or [`String`]. The second argument should be an [integer](u32) literal.
 /// # Requirements
 /// This attribute must be attached to the definition of a [`struct`] that implements [serde::Serialize](https://docs.rs/serde/latest/serde). [`Serialize`] must be implemented because all fields will be `rename`d to their identifier with the leading underscore removed.
 /// This is because the intended use case of creating such a long [`struct`] is to save storage space in online databases, so [`struct`]s with this attribute should already have implemented [`Serialize`]. In a later version of this
@@ -57,8 +59,6 @@ impl Parse for Arguments {
 /// implementing [`Serialize`], feel free to look at this crate's [Github repository](https://github.com/script-mouse/structurray) and contribute or simply open an issue to let me know that there is demand for such a use case. Note that in order to derive [`Serialize`] on a
 /// user-defined [`struct`], as shown here, requires use of `derive` features from [`serde`](https://docs.rs/serde/latest/serde).
 ///
-/// # Arguments
-/// This attribute macro should be invoked with two arguments. The first argument should be a type, such as [`u8`] or [`String`]. The second argument should be an [integer](u32) literal.
 /// # Example
 /// Let's imagine you needed to make a [`struct`] with 3 identical fields. If you were feeling particularly lazy that day, you could use this library to quickly generate all the fields you needed. This snippet:
 /// ```
@@ -84,7 +84,7 @@ impl Parse for Arguments {
 ///     _2: T,
 /// }
 /// ```
-/// Of course, this is a rather trivial example, but this attribute can be quite useful when creating longer pseudo-arrays.
+/// While `Lazyrray` is a rather trivial example, the `faux_array` attribute can be quite useful when creating longer pseudo-arrays.
 /// # Identifier Generation
 /// Identifiers are generated using a [Base62](https://en.wikipedia.org/wiki/Base62) algorithm described in detail in the documentation of [`ascii_basing`](https://docs.rs/ascii_basing/latest/ascii_basing).
 /// The algorithm uses the following 62 characters, in order from least value (0 = 0) to greatest value (Z = 61):
